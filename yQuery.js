@@ -5,10 +5,13 @@
 		}
 		var elements;
 		if(typeof selector === 'string') {
+			// this returns an array like thing
 			elements = document.querySelectorAll(selector);
 		} else if ($.isArray(selector)) {
-			elements = selector;
+      elements = selector;
 		}
+
+    // need to turn our array like things into an array
 		[].push.apply(this, elements);
 	};
 
@@ -18,4 +21,10 @@
 		}
 		return target;
 	};
+
+	$.extend($, {
+		isArray: function(obj) {
+			return Array.isArray(obj);
+		}
+	})
 })();
