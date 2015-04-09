@@ -1,26 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="style.css"/>
-	<link rel="stylesheet" href="../yQuery/lib/qunit.css"/>
-	<title>yQuery Test</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="../yQuery/lib/qunit.css"/>
+  <title>yQuery Test</title>
 </head>
 <body>
-	<div id="qunit"></div>
-	<div id="qunit-area"></div>
-	<script src="yQuery.js"></script>
-	<script src="../yQuery/lib/qunit.js"></script>
-	<script>
-		module('yQuery utilities');
+  <div id="qunit"></div>
+  <div id="qunit-area"></div>
+  <script src="yQuery.js"></script>
+  <script src="../yQuery/lib/qunit.js"></script>
+  <script>
+    module('yQuery utilities');
 
-		test('$.extend', function() {
-			var target = { first: 'Yan'},
-			obj = { last: 'Fan'};
-			var result = $.extend(target, obj);
-			equal (result, target, 'The target and the result should be equal');
-			deepEqual(result, {first: 'Yan', last: 'Fan'}, 'Properties should be correctly added');
-		});
-	</script>
+    test('$.extend', function() {
+      var target = { first: 'Yan'},
+      obj = { last: 'Fan'};
+      var result = $.extend(target, obj);
+      equal (result, target, 'The target and the result should be equal');
+      deepEqual(result, {first: 'Yan', last: 'Fan'}, 'Properties should be correctly added');
+    });
+
+    test('$.isArray', function() {
+      var obj = {1: 'a', 'foo': 'b'};
+      var arr = [1,2,3,4,5];
+      var result = $.isArray(obj);
+      var result2 = $.isArray(arr);
+      equal (result, false, 'An object should not be an array');
+      equal (result2, true, 'An array should return true');
+    });
+
+    test('$.each', function() {
+      var arr = [1,2,3];
+      var callback = function(item) {
+        return item*10;
+      };
+      var result = $.each(arr, callback);
+      equal (result, [10, 20, 30], 'Items in arrays should go through the callback');
+    })
+  </script>
 </body>
 </html>

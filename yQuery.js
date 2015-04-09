@@ -25,6 +25,16 @@
 	$.extend($, {
 		isArray: function(obj) {
 			return Array.isArray(obj);
-		}
+		},
+
+    each: function(obj, callback) {
+      var result = [];
+      if(Array.isArray(obj)) {
+        for(var i = 0; i<obj.length; i++) {
+          result.push(callback(obj[i]));
+        }
+      }
+      return result;
+    }
 	})
 })();
