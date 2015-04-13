@@ -18,7 +18,7 @@
       var target = { first: 'Yan'},
       obj = { last: 'Fan'};
       var result = $.extend(target, obj);
-      equal (result, target, 'The target and the result should be equal');
+      equal(result, target, 'The target and the result should be equal');
       deepEqual(result, {first: 'Yan', last: 'Fan'}, 'Properties should be correctly added');
     });
 
@@ -27,18 +27,41 @@
       var arr = [1,2,3,4,5];
       var result = $.isArray(obj);
       var result2 = $.isArray(arr);
-      equal (result, false, 'An object should not be an array');
-      equal (result2, true, 'An array should return true');
+      equal(result, false, 'An object should not be an array');
+      equal(result2, true, 'An array should return true');
     });
 
     test('$.each', function() {
-      var arr = [1,2,3];
-      var callback = function(item) {
-        return item*10;
-      };
-      var result = $.each(arr, callback);
-      equal (result, [10, 20, 30], 'Items in arrays should go through the callback');
-    })
+      var obj = ['a','b'];
+      var result = $.each(obj, function(index, value){
+        if(index === 0 )  equal(value, 'a', 'how is it with an array?');
+        else if(index === 1 ) equal(value, 'b', 'can it find the index at 1?');
+        else ok(false,'you\'re on the wrong index, dude');
+      });
+      equal(obj, result);
+
+      obj = {name: 'yan', age: '25'};
+      result = $.each(obj, function(prop, value){
+        if(prop === 'name' )    equal(value, 'yan', 'can it work with objects?');
+        else if(prop === 'age' ) equal(value, '25', 'can it work with more objects?');
+        else ok(false, 'you\'re on the wrong index, dude');
+      });
+      equal(obj, result);
+      
+      var obj = {0:'a', 1:'b', length: 2};
+      var result = $.each(obj, function(index, value){
+        if(index === 0 )  equal(value, 'a');
+        else if(index === 1 ) equal(value, 'b');
+        else ok(false, 'you\'re on the wrong index, dude');
+      });
+      equal(obj, result);
+    });
+
+    //takes in an 
+    test('$.map', function() {
+      $('body').append('<li>hello</li>');
+    });
+
   </script>
 </body>
 </html>

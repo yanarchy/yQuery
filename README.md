@@ -10,8 +10,20 @@ Reimplementing Parts of jQuery...for funsies!
 Reimplementing some of the more popular jQuery methods.
 
 ## yQuery
-+ $
-+ $.extend
++ $()
++ $.extend()
 + isArrayLike
-+ $.isArray
-+ $.each
++ $.isArray()
++ $.each()
++ $.makeArray()
+
+## Next Up!
++ $.map()
++ $.reduce()
++ $.merge()
++ $.trim()
++ $.length
++ $.contains()
++ $.get()
++ $.ajax()
++ $.bind()

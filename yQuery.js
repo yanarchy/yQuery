@@ -15,6 +15,18 @@
     [].push.apply(this, elements);
   };
 
+  var isArrayLike = function(obj) {
+    if(typeof obj.length === 'number') {
+      if(obj.length === 0){
+        return true;
+      } else if(obj.length > 1) {
+        return (obj.length-1) in obj;
+      }
+    } else {
+      return false;
+    }
+  };
+
   $.extend = function(target, obj) {
     for(var item in obj) {
       target[item] = obj[item];
@@ -27,14 +39,24 @@
       return Array.isArray(obj);
     },
 
+    //https://api.jquery.com/jquery.each/
     each: function(obj, callback) {
       var result = [];
-      if(Array.isArray(obj)) {
+      if(isArrayLike(obj)) {
         for(var i = 0; i<obj.length; i++) {
-          result.push(callback(obj[i]));
+          if(callback.call(this, i, obj[i]) === false)
+            break;
+        }
+      } else {
+        for(var item in obj) {
+          if(obj.hasOwnProperty(item) === false)
+            break;
         }
       }
-      return result;
+      console.log(result);
+      return obj;
     }
-  })
-})();
+  });
+
+}())
+
